@@ -1,0 +1,661 @@
+linux(ubuntu16.04)
+
+1. 准备工作
+	1) linux操作系统
+		ubuntu
+			服务器版
+			桌面版
+		红帽子
+		树莓派
+
+		深度桌面版 （linux操作系统）
+
+		1. 双系统 ubuntu / windows
+		2. 虚拟机 
+		3. 云服务器
+			客户端 
+			终端工具				云服务器
+				xshell 				阿里云
+				putty					腾讯云
+				mac/linux
+		ssh user@ip 	mac如何使用ssh
+		阿里云 
+		ip				134.175.154.93
+		user 			root
+		password	重置密码
+
+	2) linux特点
+		1. 性能强劲，运行稳定，一般作为服务器
+		2. 整个操作系统可以被压缩成很小的一个文件，容易植入一些硬件设备中
+			飞行器 
+		3. 开源免费(linux源代码)
+			linux -> 硬件设备
+			ubuntu -> 树莓派
+
+			源码
+			----->
+			使用
+			修改
+			第三方		linux()
+			git 		git版本控制 	github
+			
+
+		4. 对于初学者容易建立编程思维，是学习编程语言最好的环境
+			linux
+			c				vc
+			java		eclipse/myeclipse
+			c++ 		vc
+			php			eclipse
+			web 		dw/ws
+
+			hello.html 	-> 浏览器
+			hello.c -编译-> 	hello.o -> 运行
+		5. 文件系统
+			没有盘符的概念，所有的文件都处于根目录下，目录也是一种特殊的文件
+
+		c语言
+		算法	-- c语言版本
+			c语言
+		数据结构 - c语言版本
+		操作系统（树莓派 DIY）
+		计算机网络 			组网
+		数据库系统概论 	mysql -> linux ->sql
+			select * from user where gender='male';
+
+		部署静态网站
+			wangyi
+				images 、css 、index.html
+			newblance
+				images 、css 、index.html
+		部署动态网站
+			.jar（Java）
+			linux jdk 运行jar --> mysql
+			接口
+			增删改查			
+		部署分布式的附件存储服务器
+			上传图片
+		后台服务部署(js)
+			...
+			demo
+		部署博客系统 （基于nodejs,php）
+
+2. 使用
+	1) linux
+		登录方式：
+			win10 openssh: dos
+			mac 	打开ssh服务：
+			win7 	xshell
+
+			$ ssh root@ip
+
+			应用镜像，
+				wordpress
+				lamp
+			系统镜像
+				win server
+				centos
+				ubuntu16.04
+				ubuntu18.04
+
+		登录成功
+
+		root@VM-0-9-ubuntu:~$
+			root 						当前账号
+			@								分隔符号
+			VM-0-9-ubuntu		主机名称
+			:								分割符号
+			~ 							当前所在目录	 
+			$ 							分割符号
+
+		windows
+			c:/users/licy
+		linux
+			/home/licy
+
+	2. 用户管理（超级管理员身份）
+		root / 默认密码（重置密码）
+		使用root登录到ubuntu系统中
+
+		1) 创建新用户
+			$ adduser 用户名称
+			过程：
+				1. 新建组，组名与用户名保持一致
+					/etc/group		保存了组信息
+				2. 新建用户，并且将用户放到刚刚新建的组中
+					/etc/passwd 	保存了用户信息
+					/etc/shadow  	保存了用户的密码信息	
+				3. 创建了一个家目录 /home/xxx
+					两居室
+					三居室 	
+					四居室
+					改善型 （平层、别墅）	-小康	
+				4. /etc/skel拷贝到用户家目录		
+		2) 删除用户
+			$	userdel -r zhangsan
+			删除用户信息，并且将用户家目录也给删除
+		3) 切换用户
+			$ su - 
+		4) 修改用户
+			$ usermod
+			$ usermod -g 1008 zhangsan
+			将zhangsan的组id换成1008
+		5) 修改组信息
+			$ groupmod
+			$ groupmod -n group0 boss
+		(未完待续...)
+
+	3. linux目录结构
+		/
+			/home 	普通用户家目录
+				zhangsan
+				lisi
+					默认情况下，普通用户只能在用户家目录中进行更新操作（增加、删除、修改）
+			/root 	超级管理员的家目录
+			/etc 		系统配置文件目录
+			/opt 		第三方文件解压安装目录
+			/usr 		文件的默认目录
+			/var 		
+			/sys 		系统目录
+			/dev
+			...	
+
+		硬件 -> 软件
+		linux 云服务器
+		树莓派
+		传感器
+		算法			
+	4. 文件系统
+		1) 新建目录
+			$ mkdir linux es5 es6
+			$ mkdir -p day01/a/b/c
+		2) 新建文件/修改最近访问时间
+			$ touch 文件名
+			如果指定的文明名不存在，创建该文件。如果存在，修改最近访问时间为当前时间
+		3) 拷贝文件或者目录
+			$ cp a.txt a.txt.bak
+			$ cp -r dir1 dir2
+		4) 连接
+			创建硬链接（防止误删除，多个指针指向同一个inode）
+			$ ln a.txt a.txt.h 	
+			创建软连接(快捷方式)
+			$ ln -s a.txt a.txt.s
+		5) 移动
+			$ mv a.* dir1
+			$ mv a b
+		6) 删除
+			$ rm a.txt
+			$ rm -r dir2
+
+			$ rmdir 	只能删除空目录
+		7) 重定向
+			>
+			>> 
+			$ date > a.txt
+			$ date >> a.txt
+			$ more /etc/passwd > b.txt
+			$ ls -l /etc > c.txt
+		8) 压缩与解压缩
+			1. 压缩
+				.gz 	gzip 	压缩
+				.bz2 	bzip2	压缩
+				.zip 	zip		打包压缩
+				
+				$ gzip a.txt 	
+				=> a.txt.gz
+				$ bzip2 a.txt
+				=> a.txt.bz2 
+				$ zip all.zip *.txt
+				=> all.zip 	(a.txt b.txt c.txt)
+			2. 解压缩
+				$ gunzip a.txt.gz
+				=> a.txt
+				$ bunzip2 a.txt.bz3
+				=> a.txt
+				$ unzip all.zip
+				=> a.txt b.txt c.txt
+				$ unzip all.zip -d dir2
+				=> dir2/a.txt b.txt c.txt
+			3. 归档
+				tar	
+					-c 	创建归档文件
+					-x 	拆档
+					-v 	打印细节
+					-f 	指定归档/拆档文件
+					-j 	bzip2格式 	xxx.tar.bz2
+					-z 	gzip格式 	xxx.tar.gz
+
+				$ tar cvf all.tar *.txt
+				$ tar cvzf all.tar.gz *.txt	(gzip)
+				$ tar cvjf all.tar.bz2 *.txt (bzip2)
+			
+			4. 拆档
+				$ tar xvf all.tar.gz
+	5. 其他命令
+		$ clear
+			清理终端屏幕
+		$ ls /home
+			列出家目录的所有的目录以及文件
+			zhangsan/zhangsan123
+			ls -l
+
+			drwxr-xr-x 2 licy webui 4096 Aug 13 14:42 dir1
+
+			d 		文件类型 	d 目录; - 普通文件
+			rwxr-xr-x 	
+				rwx 	read write execute 	拥有者权限
+				r-x 	read - execute 			同组人权限
+				r-x 	read - execute 			其他人权限
+			2 		连接数
+			licy	拥有者
+			webui	拥有者所属组
+			4096	文件大小
+			Aug 13 14:42	最近访问时间
+			dir1	文件名称
+
+		$ man 命令
+			查看指定命令的手册
+			q 	quit 退出手册
+			回车 下一行
+			空格 下一页
+		$ more 预览
+		$ less 预览
+		$ cat 	连接后显示
+		$ tac 	连接后显示
+		$ nl 		添加行号后显示
+		$ tail 预览末尾10行
+		$ head 预览头10行
+		$ cd 	 切换目录
+			cd 		回到家目录
+			cd ~ 	回到家目录
+			cd / 	切换到根目录
+			cd /home/zhangsan 	切换到/home/zhangsan目录下
+		$ pwd 	输出当前目录地址
+
+	6. 软件安装
+		1) apt命令安装
+			 更新源
+			# apt update 
+
+			 安装软件包
+			# apt install xxx
+			# apt install zip
+			# apt install git
+			# apt install mysql-server-5.7
+
+		2) 解压缩安装
+			jdk
+			nodejs
+
+
+	7. 权限	
+		谁？
+			拥有者 		u 		user
+			同组人 		g 		group
+			其他人 		o 		other
+			所有人 		a 		all
+		权限类型？
+			读				r 		read
+			写 			w 		write
+			执行 		x 		execute
+		权限
+			rw- 	110 	6
+			r-x 	101 	5
+		修改文件权限
+		1. 通过表达式来修改
+			$ chmod g-r a.txt
+			$ chmod o+w a.txt
+		2. 通过二进制方式修改
+			--x 	001 	1
+			-w-		010		2
+			-wx		011		3
+			r-- 	100		4
+			r-x 	101		5
+			rw- 	110		6
+			rwx 	111		7
+			$ chmod 644 a.txt
+
+			修改a.txt的权限，拥有者具有读写权限，同组人和其他人具有读权限
+
+	8. vim
+		菜鸟 	- 	linux编程 vi(sublime)
+		大神		- 	IDE 	webstorm
+		修改配置文件、快速修复代码
+
+		1) 打开vim
+			1. 打开vi 编写 保存
+			2. 新建文件，通过vi打开文件
+			3. 直接打开一个文件
+		2) 模式
+			命令行模式
+				复制		yy
+				粘贴 	p
+				删除 	dd 	dw
+				回退		u
+				替换当前行	cc
+			编辑模式【左下角 insert】
+				写代码
+			底行模式【底行可以输入】
+				保存 		:w
+				另存为 		:w other.txt
+				退出 		:q
+				保存退出 	:wq
+				不保存退出 	:q!
+				查找 		/larry	n表示查找下一个
+				替换 		:1,$s/larry/8888/g
+				复制 		:1,4co55
+				剪切			:1,4m$
+		3) vi配置
+			~/.vimrc
+			spf13-vim
+
+			$ git --version
+			$ curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
+
+	9. sudo
+		$ more /etc/shadow
+		$ sudo more /etc/shadow
+
+		# vi /etc/sudoers
+		将要添加的用户添加在root后面
+
+	10. 其他重要命令
+		$ find ./ -name '*.txt'
+			查找当前目录中所有的.txt文本文档
+		$ grep 1003 /etc/passwd
+			查找passwd文件中的包含1003行的内容
+		$ sleep 1000s
+		$ sleep 1000s &
+			将当前进程放到后台执行
+		$ ps -ef | grep java
+			在所有进程中找到java相关的进程
+		$ kill -9 pid
+		$ reboot
+			重启云服务器
+
+	11. apache2
+		1) 安装
+			$ sudo apt install apache2
+				默认情况下安装后会自动启动
+
+			$ sudo service apache2 status
+			$ sudo service apache2 start
+			$ sudo service apache2 restart
+			$ sudo service apache2 stop
+
+				启动apache2
+
+			apache的部署目录
+			 	/var/www/html/
+			 		wangyi/index.html
+
+		2) 测试
+			浏览器地址栏
+			http://152.136.136.220
+			=> /var/www/html/index.html
+
+			http://152.136.136.220/wangyi
+			=> /var/www/html/wangyi/index.html
+
+		3) 思考
+			开发网易
+				mac sublime 开发网易严选
+				wangyi
+					images
+					css
+					index.html
+
+			==部署到云服务器==>
+				wangyi -> /var/www/html
+
+			解决方案
+				fillzilla
+
+	13. vsftpd安装
+		作用：可以使用ftp工具或者命令将客户机上的文件上传到服务器上。
+
+		server: ftp服务器程序 	vsftpd
+		client: ftp客户端程序 	fillzilla、smartFTP
+
+		关闭进程：
+			$ ps -ef | grep vsftpd
+			$ kill -9 pid
+			# 或者
+			$ killall vsftpd
+		删除软件（apt install / apt remove）
+		删除软件（解压 / 删除）
+			$ sudo apt remove --purge vsftpd
+		安装过程：
+			1) 使用apt安装
+				$ sudo apt install vsftpd
+			2) 测试
+				$ vsftpd -version
+				vsftpd: version 3.0.3
+				/usr/sbin不在PATH中
+			3) 连接测试
+				$ ftp 152.136.136.220
+				提示输入用户名密码，说明可以访问ftp服务器
+				如果提示timeout，说明网络有可能不同，对方添加了防火墙
+				
+				解决方案：
+					去阿里云的管理页面中打开21端口即可
+			4) 如果使用的是fillzilla
+				将被动模式变为主动模式
+			5) 这时候可以查看，但是无法上传文件
+				解决方案：
+					配置vsftpd
+					$ sudo vi /etc/vsftpd.conf
+					将31行的注释给删除即可
+					write_enable=YES
+			6) 重启vsftpd
+				$ sudo service vsftpd restart
+
+		PATH 环境变量
+			/home/ubuntu/bin:
+			/home/ubuntu/.local/bin:
+			/usr/local/sbin:
+			/usr/local/bin:
+			/usr/sbin:
+			/usr/bin:
+			/sbin:
+			/bin:
+			/usr/games:
+			/usr/local/games:
+			/snap/bin:/opt/node-v10.16.2/bin:
+		终端
+			ls
+			vsftpd
+
+		解决方案：
+		$ sudo vi /etc/profile
+			追加
+			export PATH=$PATH:/usr/sbin
+		$ source /etc/profile
+
+	14. subversion 安装
+		将本地代码保存到服务器端，具有版本控制。
+		客户端：tortoiseSVN/axure/webstorm
+		服务端：subversion
+		1) 安装
+			$ sudo apt install subversion
+		2）测试
+			$ svn help
+		3) 创建仓库，初始化仓库
+			# 进入到家目录
+			$ cd 
+			# 在家目录中创建仓库目录
+			$ mkdir repository
+			# 将仓库目录初始化为svn远程仓库
+			$ svnadmin create repository
+				conf  db  format  hooks  locks  README.txt
+		4) 配置仓库信息
+				conf
+					svnserve.conf 	svn核心配置文件
+					 	19 anon-access = read
+ 						20 auth-access = write
+						27 password-db = passwd
+						36 authz-db = authz
+					passwd 					用户及密码
+						[users]
+						terry = terry
+						larry = larry
+						tom = tom
+						jacky = jacky
+						boss = boss
+					authz 					权限
+						[groups]
+						webui = tom,jacky,boss
+						javaee = terry,larry,boss
+
+						[/]
+						boss = rw
+
+						[/webui]
+						@webui = rw
+
+						[/javaee]
+						@javaee = rw
+		5) 启动仓库
+			$ svnserve -dr repository
+
+		6) 开放端口	3690
+		7) 使用小乌龟链接
+
+	15. 安装nodejs 【jdk】解压安装
+		1) 下载安装包
+			https://nodejs.org/dist/v10.16.2/node-v10.16.2-linux-x64.tar.xz
+
+			$ wget https://nodejs.org/dist/v10.16.2/node-v10.16.2-linux-x64.tar.xz
+
+		2) 解压到/opt中
+		3) 配置环境变量
+			node的家目录
+				NODE_HOME=/opt/node-v10.16.2
+				node的可执行文件目录	/opt/node-v10.16.2/bin
+			$ sudo vi /etc/profile
+				追加
+				export NODE_HOME=/opt/node-v10.16.2
+				export PATH=$PATH:/usr/sbin:$NODE_HOME/bin
+			$ source /etc/profile
+		4) 测试
+			$ node -v
+			v10.16.2
+
+	16. git的应用
+		1) 初始化本地仓库
+			c:/briup/git_web1903
+			> git init
+		2) 查看仓库状态
+			> git status
+
+
+
+		3) 创建文件，并且将文件交给git来追踪（在一起）
+			> git add *
+		4) 提交成为一个版本（结婚）
+			> git commit -m "xxxx"
+			第一次提交的时候需要设置当前用户
+			> git config --global user.name = "pluslicy"
+			> git config --global user.email = "licy@briup.com"
+		5) 查看提交记录
+			> git log
+		6) 时光穿梭
+			> git reset --hard commitID
+		7) 查看所有提交记录
+			> git reflog
+		8) 忽略文件
+			.gitignore
+
+			/node_modules
+			/dist
+
+
+		9) 创建远程仓库 （github/gitee【码云】）
+
+			https://github.com/pluslicy/git-web1903.git
+			注意：
+				一个本地仓库只能与一个远程仓库绑定，一个项目一个仓库
+			1. 远程仓库与本地仓库的绑定
+				> git remote add origin https://github.com/pluslicy/git-web1903.git
+
+			2. 将本地仓库的代码提交到远程
+				> git push origin master
+
+			3. 将远程仓库的代码更新到本地
+				> git pull origin master
+
+		10)多人协作
+			1. 组长邀请合作者
+			2. 合作者通过邮箱中的邀请连接同意邀请
+			3. 合作者就可以提交代码
+
+			git add -> git commit -> git pull -> git push
+
+		11)分支管理 
+			https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424
+		12) git的配置
+			用户名 email 远程地址
+
+			查看git的配置信息
+			> git config --list
+			配置信息保存在哪里?
+			~/.gitconfig
+
+			项目根目录 .git
+			git-web1093/.git
+
+
+	17. 融会贯通
+		axure
+		html
+		css3
+		linux
+		----------- 美工（页面仔）静态页面 ----------- 
+
+		psd/axure 
+		->（html5 + css3）=》svn / github(private) 
+		-> apache2
+
+		------- 单页面程序（后台管理页面）dom驱动思想 ------
+		javascript = js/dom/bom(ajax)
+		bootstrap
+		jquery
+		H5 API
+		----------- 前端 数据交互 --------------
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------
+云服务器
+	group0
+		zhangsan
+		lisi
+	group1
+		wangwu
+		zhaoliu
+	...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
